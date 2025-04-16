@@ -5,12 +5,23 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
+let cube = {
+  front,
+  back,
+  left,
+  right,
+};
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight, WEBGL);
+  frameRate(7);
 }
 
 function draw() {
-  background(220);
-  circle(mouseX, mouseY, 50);
+  background("black");
+  if (mouseIsPressed){
+    rotateX(mouseX);
+    rotateY(mouseY);
+  }
+  box(200, 200, 200);
 }
