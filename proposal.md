@@ -12,4 +12,4 @@ I am planning on building a 3x3 rubics cube simulation. This simulation will be 
 ## Nice To Have List
 - Timer for when completed
 - Have a nice loading screen and make apperance more appealing
-- yet one more thing
+- Self solver and records all steps
