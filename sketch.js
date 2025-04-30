@@ -3,48 +3,49 @@
 // April 29th, 2025
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// - I learnt about 3D arrays
 
 
 //nice reference - https://www.youtube.com/watch?v=W24xhB9PO54
 
 class Box{
-  constructor(x, y, z, sideLength, color){
-    this.sideLength = 20;
-    this.x = x * sideLength;
-    this.y = y * sideLength;
-    this.z = z * sideLength;
-    this.color = color;
+  constructor(x, y, z, sideLength){
+    this.sideLength = sideLength;
+    this.x = x;
+    this.y = y;
+    this.z = z;
   }
 
   display(){
-    fill(this.color);
-    stroke(0);
-    strokeWeight(8);
-    applyMatrix();
+    push();
+    //changing origin
     translate(this.x, this.y, this.z);
-    cube(this.sideLength);
-    resetMatrix();
+
+    stroke(0);
+    strokeWeight(1);
+    box(this.sideLength);
+    pop();
   }
 };
 
-let dimensions = 3;
 let boxes = [];
+let sideLength = 75;
+let dimensions = 3;
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
-  orbitControl();
-  let cube = new Box(dimensions,dimensions, dimensions);
-
+  
+  //3 by 3 grid
   for(let i = 0; i < dimensions; i++){
     for(let j = 0; j < dimensions; j++){
       for(let k = 0; k < dimensions; k++){
-        let sideLength = 20;
-        let x = sideLength * i;
-        let y = sideLength * j;
-        let z = sideLength * k;
-        cube[[i][j][k]] = new Box(x, y, z, sideLength);
+        
+        //centering cube
+        let x = i * sideLength - sideLength;
+        let y = j * sideLength - sideLength;
+        let z = k * sideLength - sideLength;
 
+        boxes.push (new Box(x, y, z, sideLength));
       }
     }
   }
@@ -53,12 +54,10 @@ function setup() {
 function draw() {
   background("black");
 
-  for(let i = 0; i < dimensions; i++){
-    for(let j = 0; j < dimensions; j++){
-      for(let k = 0; k < dimensions; k++){
-        cube[i][j][k].display();
+  rotateX(mouseY * - 0.01);
+  rotateY(mouseX * - 0.01);
 
-      }
-    }
+  for(let box of boxes){
+    box.display();
   }
 }
