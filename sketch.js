@@ -31,6 +31,16 @@ class Box{
   }
 };
 
+//color
+let color = [
+  "white",
+  "red",
+  "green",
+  "blue",
+  "orange",
+  "yellow",
+];
+
 let boxes = [];
 let sideLength = 75;
 let dimensions = 3;
@@ -40,7 +50,7 @@ let myFont;
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
 
-  //3 by 3 grid
+  //3D array
   for(let i = 0; i < dimensions; i++){
     for(let j = 0; j < dimensions; j++){
       for(let k = 0; k < dimensions; k++){
@@ -57,26 +67,34 @@ function setup() {
 }
 
 function draw() {
+
   background(255, 255, 204);//color code - #FFFFCC
 
-  //able to move while mouse dragged
-  orbitControl();
-
-  for(let box of boxes){
-    box.display();
-  }
-
   title();
+
+  push();
+  addCubes();
+  pop();
 }
 
 function preload(){
-  myFont = loadFont("King 500.ttf");
+  myFont = loadFont("Kings-Regular.ttf");
 }
 
 function title(){
   fill(204, 204, 255);//color code - #CCCCFF
   textAlign(CENTER,CENTER);
   textFont(myFont);
-  textSize(50);
-  text("Rubiks Cube Simulator", width/2, height/7);
+  textSize(100);
+  text("Rubiks Cube Simulator", 0, windowHeight / -3);
+}
+
+function addCubes(){
+
+  //able to move while mouse dragged
+  orbitControl(2, 2, 2);
+
+  for(let box of boxes){
+    box.display();
+  }
 }
