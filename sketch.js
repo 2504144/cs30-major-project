@@ -27,23 +27,25 @@ class Box{
     stroke(0);
     strokeWeight(1);
     box(this.sideLength);
+    
+    //creating custom cube with beginShape function "adding color"
+    beginShape(QUADS);
+    
+    //switching shapes into 3D tiles
+      
+
+    endShape();
     pop();
   }
 };
 
 //color
-let color = [
-  "white",
-  "red",
-  "green",
-  "blue",
-  "orange",
-  "yellow",
-];
+let color = ["white", "red", "green", "blue", "orange", "yellow"];
 
 let boxes = [];
 let sideLength = 75;
 let dimensions = 3;
+let r = sideLength / 2;
 
 let myFont;
 
