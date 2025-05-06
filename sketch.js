@@ -32,7 +32,7 @@ class Box{
     beginShape(QUADS);
     
     //switching shapes into 3D tiles
-      
+
 
     endShape();
     pop();
@@ -72,23 +72,12 @@ function draw() {
 
   background(255, 255, 204);//color code - #FFFFCC
 
-  title();
 
-  push();
   addCubes();
-  pop();
 }
 
 function preload(){
   myFont = loadFont("Kings-Regular.ttf");
-}
-
-function title(){
-  fill(204, 204, 255);//color code - #CCCCFF
-  textAlign(CENTER,CENTER);
-  textFont(myFont);
-  textSize(100);
-  text("Rubiks Cube Simulator", 0, windowHeight / -3);
 }
 
 function addCubes(){

@@ -6,3 +6,14 @@ html, body {
 canvas {
   display: block;
 }
+
+h1{
+
+  /* color code - 204, 204, 255*/
+
+  color: #CCCCFF;
+  position: absolute;
+  font-size: 75px;
+  font-family: "Kings";
+  left: 27%;
+}
