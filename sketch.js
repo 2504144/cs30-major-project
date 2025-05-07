@@ -9,6 +9,21 @@
 
 //nice reference - https://www.youtube.com/watch?v=W24xhB9PO54
 
+//colors
+let color = new Map();
+color.set("front", "white");
+color.set("back", "yellow");
+color.set("right", "blue");
+color.set("left", "green");
+color.set("up", "red");
+color.set("down", "orange");
+
+
+let boxes = [];
+let sideLength = 75;
+let dimensions = 3;
+let r = sideLength / 2;
+
 class Box{
   constructor(x, y, z, sideLength){
     this.sideLength = sideLength;
@@ -24,30 +39,60 @@ class Box{
     translate(this.x, this.y, this.z);
 
     fill("white");
-    stroke(0);
-    strokeWeight(1);
-    box(this.sideLength);
+    stroke(1);
+    strokeWeight(5);
+    //box(this.sideLength);
     
     //creating custom cube with beginShape function "adding color"
     beginShape(QUADS);
     
-    //switching shapes into 3D tiles
+    //setting coordinate for each tile
+   
+    //z-axis
 
+    //select color
+    fill(color.get("front"));
+    vertex(-r, -r, r);
+    vertex(r, -r, r);
+    vertex(r, r, r);
+    vertex(-r, r, r);
+
+    fill(color.get("back"));
+    vertex(-r, -r, -r);
+    vertex(r, -r, -r);
+    vertex(r, r, -r);
+    vertex(-r, r, -r);
+
+    //y-axis
+    fill(color.get("up"));
+    vertex(-r, -r, -r);
+    vertex(r, -r, -r);
+    vertex(r, -r, r);
+    vertex(-r, -r, r);
+
+    fill(color.get("down"));
+    vertex(-r, r, r);
+    vertex(r, r, r); 
+    vertex(r, r, -r);
+    vertex(-r, r, -r);
+
+    //x-axis
+    fill(color.get("right"));
+    vertex(-r, -r, -r);
+    vertex(-r, r, -r);
+    vertex(-r, r, r);
+    vertex(-r, -r, r);
+    
+    fill(color.get("left"));
+    vertex(r, -r, -r);
+    vertex(r, r, -r);
+    vertex(r, r, r);
+    vertex(r, -r, r);
 
     endShape();
     pop();
   }
 };
-
-//color
-let color = ["white", "red", "green", "blue", "orange", "yellow"];
-
-let boxes = [];
-let sideLength = 75;
-let dimensions = 3;
-let r = sideLength / 2;
-
-let myFont;
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
