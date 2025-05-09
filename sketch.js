@@ -23,6 +23,7 @@ let boxes = [];
 let sideLength = 75;
 let dimensions = 3;
 let r = sideLength / 2;
+let highlight = true;
 
 class Box{
   constructor(x, y, z, sideLength){
@@ -50,7 +51,9 @@ class Box{
    
     //z-axis
 
-    //select color
+    //add color
+
+    // |||| faces
     fill(color.get("front"));
     vertex(-r, -r, r);
     vertex(r, -r, r);
@@ -119,6 +122,7 @@ function draw() {
 
 
   addCubes();
+  selection();
 }
 
 function preload(){
@@ -132,5 +136,14 @@ function addCubes(){
 
   for(let box of boxes){
     box.display();
+  }
+
+
+}
+
+//selecting cubes to turn
+function selection(){
+  if (boxes.highlight){
+    stroke(204, 204, 255);
   }
 }
