@@ -142,7 +142,8 @@ function addCubes(){
 }
 
 //selecting cubes to turn
-function selection(){
+function selection(x, y, z){
+  return [x, y, z];
   if (boxes.highlight){
     stroke(204, 204, 255);
   }

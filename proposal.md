@@ -4,8 +4,8 @@
 I am planning on building a 3x3 rubics cube simulation. This simulation will be randomised then player can solve the Rubicks Cube.
 
 ## Needs To Have List
-- 1) Logic of Rubics Cube
-- 2) 3D array(create a cube)
+- 1) Logic of Rubics Cube!!
+- 3D array(create a cube)(done)
 - 3) Rubics Cube is able to rotate
 - 4) Use Rotate Translate to clean up the look
 
