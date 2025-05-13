@@ -53,7 +53,7 @@ class Box{
 
     //add color
 
-    // |||| faces
+    // 4 |||| faces
     fill(color.get("front"));
     vertex(-r, -r, r);
     vertex(r, -r, r);
@@ -122,11 +122,12 @@ function draw() {
 
 
   addCubes();
-  selection();
+  //selection();
 }
 
-function preload(){
-  myFont = loadFont("Kings-Regular.ttf");
+//window resizing
+function windowResize(){
+  resizeCanvas(windowWidth, windowHeight);
 }
 
 function addCubes(){
@@ -142,9 +143,10 @@ function addCubes(){
 }
 
 //selecting cubes to turn
-function selection(x, y, z){
-  return [x, y, z];
-  if (boxes.highlight){
-    stroke(204, 204, 255);
+function selection(){
+
+  //for loop for each cube
+  for (let cube of cubes){
+
   }
 }
