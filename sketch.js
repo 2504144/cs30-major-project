@@ -53,15 +53,15 @@ class Box{
     
     //creating custom cube with beginShape function "adding color"
     beginShape(QUADS);
-    
-    //setting coordinate for each tile
-   
-    //add color
 
     // 4 |||| faces
 
     //z-axis
+
+    //add color
+
     fill(color.get("front"));
+    //setting coordinate for each tile
     vertex(-r, -r, r);
     vertex(r, -r, r);
     vertex(r, r, r);
@@ -168,24 +168,25 @@ function keyPressed(){
       if (b.j === 1){
 
         //half_pi 90 degrees
-        b.angle = HALF_PI;
+        b.angle += HALF_PI;
       }
     }
   }
   // left - l / left arrow key
   if (key === "l"){
+    //goes through the grid of cubes
     for (let b of boxes){
       if (b.j === 1){
-        b.angle = - HALF_PI;
+        b.angle -= HALF_PI;
       }
     }
   }
   // up - u / up arrow key
   if (key === "u"){
+    //goes through the grid of cubes
     for (let b of boxes){
       if (b.k === 1){
-        newAngle = HALF_PI;
-        newAngle = b.angle;
+        b.angle += HALF_PI;
       }
     }
   }
