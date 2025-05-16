@@ -26,11 +26,15 @@ let r = sideLength / 2;
 let highlight = true;
 
 class Box{
-  constructor(x, y, z, sideLength){
+  constructor(x, y, z, sideLength, i, j, k){
     this.sideLength = sideLength;
     this.x = x;
     this.y = y;
     this.z = z;
+    this.i = i;
+    this.j = j;
+    this.k = k;
+    this.angle = 0;
   }
 
   display(){
@@ -38,6 +42,9 @@ class Box{
 
     //changing origin
     translate(this.x, this.y, this.z);
+
+    //rotation
+    rotateY(this.angle);
 
     fill("white");
     stroke(1);
@@ -49,11 +56,11 @@ class Box{
     
     //setting coordinate for each tile
    
-    //z-axis
-
     //add color
 
     // 4 |||| faces
+
+    //z-axis
     fill(color.get("front"));
     vertex(-r, -r, r);
     vertex(r, -r, r);
@@ -110,7 +117,7 @@ function setup() {
         let y = j * sideLength - sideLength;
         let z = k * sideLength - sideLength;
         
-        boxes.push (new Box(x, y, z, sideLength));
+        boxes.push (new Box(x, y, z, sideLength, i, j, k));
       }
     }
   }
@@ -119,7 +126,6 @@ function setup() {
 function draw() {
 
   background(255, 255, 204);//color code - #FFFFCC
-
 
   addCubes();
   //selection();
@@ -149,4 +155,40 @@ function selection(){
   for (let cube of cubes){
 
   }
+}
+
+//keys and rotations
+function keyPressed(){
+
+  // right -  r / right arrow key
+  if (key === "r"){
+    
+    //goes through the grid of cubes
+    for (let b of boxes){
+      if (b.j === 1){
+
+        //half_pi 90 degrees
+        b.angle = HALF_PI;
+      }
+    }
+  }
+  // left - l / left arrow key
+  if (key === "l"){
+    for (let b of boxes){
+      if (b.j === 1){
+        b.angle = - HALF_PI;
+      }
+    }
+  }
+  // up - u / up arrow key
+  if (key === "u"){
+    for (let b of boxes){
+      if (b.k === 1){
+        newAngle = HALF_PI;
+        newAngle = b.angle;
+      }
+    }
+  }
+  // down - d / down arrow key
+
 }
