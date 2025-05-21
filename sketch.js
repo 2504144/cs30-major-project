@@ -45,10 +45,10 @@ class Box{
     //changing origin
     translate(this.x, this.y, this.z);
 
-    //rotation
-    rotateX(this.angleX);
-    rotateY(this.angleY);
-    rotateZ(this.angleZ);
+    // //rotation
+    // rotateX(this.angleX);
+    // rotateY(this.angleY);
+    // rotateZ(this.angleZ);
 
     fill("white");
     stroke(1);
@@ -106,6 +106,11 @@ class Box{
     endShape();
     pop();
   }
+
+  turnX(angleX){
+    createVector(this.x, this.y, this.z);
+    
+  }
 };
 
 function setup() {
@@ -160,165 +165,165 @@ function keyPressed(){
   if (key === "x"){
     for (let b of boxes){
       if (b.i === 1){
-        b.angleX += HALF_PI;
+        b.angleX += HALF_PI/2;
       }
     }
   }
 
-  //y
-  if (key === "y"){
+  // //y
+  // if (key === "y"){
     
-    //goes through the grid of cubes
-    for (let b of boxes){
-      if (b.j === 1){
+  //   //goes through the grid of cubes
+  //   for (let b of boxes){
+  //     if (b.j === 1){
 
-        //half_pi 90 degrees
-        b.angleY += HALF_PI;
-      }
-    }
-  }
-  // z
-  if (key === "z"){
-    for (let b of boxes){
-      if (b.k === 1){
-        b.angleZ += HALF_PI;
-      }
-    }
-  }
+  //       //half_pi 90 degrees
+  //       b.angleY += HALF_PI;
+  //     }
+  //   }
+  // }
+  // // z
+  // if (key === "z"){
+  //   for (let b of boxes){
+  //     if (b.k === 1){
+  //       b.angleZ += HALF_PI;
+  //     }
+  //   }
+  // }
 
-  // u
-  if (key === "u"){
-    for (let b of boxes){
-      if (b.j === 0){
-        b.angleY += HALF_PI;
-      }
-    }
-  }
+  // // u
+  // if (key === "u"){
+  //   for (let b of boxes){
+  //     if (b.j === 0){
+  //       b.angleY += HALF_PI;
+  //     }
+  //   }
+  // }
 
-  //r
-  if (key === "r"){
-    for (let b of boxes){
-      if (b.j === 0){
-        b.angleY -= HALF_PI;
-      }
-    }
-  }
+  // //r
+  // if (key === "r"){
+  //   for (let b of boxes){
+  //     if (b.j === 0){
+  //       b.angleY -= HALF_PI;
+  //     }
+  //   }
+  // }
 
-  //d
-  if (key === "d"){
-    for (let b of boxes){
-      if (b.k === 2){
-        b.angleZ += HALF_PI;
-      }
-    }
-  }
+  // //d
+  // if (key === "d"){
+  //   for (let b of boxes){
+  //     if (b.k === 2){
+  //       b.angleZ += HALF_PI;
+  //     }
+  //   }
+  // }
 
-  //l
-  if (key === "l"){
-    for (let b of boxes){
-      if (b.j === 2){
-        b.angleY += HALF_PI;
-      }
-    }
-  }
+  // //l
+  // if (key === "l"){
+  //   for (let b of boxes){
+  //     if (b.j === 2){
+  //       b.angleY += HALF_PI;
+  //     }
+  //   }
+  // }
 
-  //f
-  if (key === "f"){
-    for (let b of boxes){
-      if (b.i === 0){
-        b.angleX -= HALF_PI;
-      }
-    }
-  }
+  // //f
+  // if (key === "f"){
+  //   for (let b of boxes){
+  //     if (b.i === 0){
+  //       b.angleX -= HALF_PI;
+  //     }
+  //   }
+  // }
 
-  //b
-  if (key === "b"){
-    for (let b of boxes){
-      if (b.i === 2){
-        b.angleX += HALF_PI;
-      }
-    }
-  }
+  // //b
+  // if (key === "b"){
+  //   for (let b of boxes){
+  //     if (b.i === 2){
+  //       b.angleX += HALF_PI;
+  //     }
+  //   }
+  // }
   
-  //oppisite turn use capitalised
+  // //oppisite turn use capitalised
 
-  //X
-  if (key === "X"){
-    for (let b of boxes){
-      if (b.i === 1){
-        b.angleX -= HALF_PI;
-      }
-    }
-  }
+  // //X
+  // if (key === "X"){
+  //   for (let b of boxes){
+  //     if (b.i === 1){
+  //       b.angleX -= HALF_PI;
+  //     }
+  //   }
+  // }
 
-  // Y
-  if (key === "Y"){
-    for (let b of boxes){
-      if (b.j === 1){
-        b.angleY -= HALF_PI;
-      }
-    }
-  }
+  // // Y
+  // if (key === "Y"){
+  //   for (let b of boxes){
+  //     if (b.j === 1){
+  //       b.angleY -= HALF_PI;
+  //     }
+  //   }
+  // }
 
-  //Z
-  if (key === "Z"){
-    for (let b of boxes){
-      if (b.k === 1){
-        b.angleZ -= HALF_PI;
-      }
-    }
-  }
+  // //Z
+  // if (key === "Z"){
+  //   for (let b of boxes){
+  //     if (b.k === 1){
+  //       b.angleZ -= HALF_PI;
+  //     }
+  //   }
+  // }
 
-  // U
-  if (key === "U"){
-    for (let b of boxes){
-      if (b.j === 0){
-        b.angleY -= HALF_PI;
-      }
-    }
-  }
+  // // U
+  // if (key === "U"){
+  //   for (let b of boxes){
+  //     if (b.j === 0){
+  //       b.angleY -= HALF_PI;
+  //     }
+  //   }
+  // }
 
-  //R
-  if (key === "R"){
-    for (let b of boxes){
-      if (b.j === 0){
-        b.angleY += HALF_PI;
-      }
-    }
-  }
+  // //R
+  // if (key === "R"){
+  //   for (let b of boxes){
+  //     if (b.j === 0){
+  //       b.angleY += HALF_PI;
+  //     }
+  //   }
+  // }
 
-  //D
-  if (key === "D"){
-    for (let b of boxes){
-      if (b.k === 2){
-        b.angleZ -= HALF_PI;
-      }
-    }
-  }
+  // //D
+  // if (key === "D"){
+  //   for (let b of boxes){
+  //     if (b.k === 2){
+  //       b.angleZ -= HALF_PI;
+  //     }
+  //   }
+  // }
 
-  //L
-  if (key === "L"){
-    for (let b of boxes){
-      if (b.j === 2){
-        b.angleY -= HALF_PI;
-      }
-    }
-  }
-  //f
-  if (key === "F"){
-    for (let b of boxes){
-      if (b.i === 0){
-        b.angleX += HALF_PI;
-      }
-    }
-  }
+  // //L
+  // if (key === "L"){
+  //   for (let b of boxes){
+  //     if (b.j === 2){
+  //       b.angleY -= HALF_PI;
+  //     }
+  //   }
+  // }
+  // //f
+  // if (key === "F"){
+  //   for (let b of boxes){
+  //     if (b.i === 0){
+  //       b.angleX += HALF_PI;
+  //     }
+  //   }
+  // }
 
-  //B
-  if (key === "B"){
-    for (let b of boxes){
-      if (b.i === 2){
-        b.angleX -= HALF_PI;
-      }
-    }
-  }
+  // //B
+  // if (key === "B"){
+  //   for (let b of boxes){
+  //     if (b.i === 2){
+  //       b.angleX -= HALF_PI;
+  //     }
+  //   }
+  // }
 }
