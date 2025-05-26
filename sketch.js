@@ -26,14 +26,12 @@ let r = sideLength / 2;
 let highlight = true;
 
 class Box{
-  constructor(x, y, z, sideLength, i, j, k){
+  constructor(x, y, z, sideLength){
     this.sideLength = sideLength;
     this.x = x;
     this.y = y;
     this.z = z;
-    this.i = i;
-    this.j = j;
-    this.k = k;
+
     this.angleX = 0;
     this.angleY = 0;
     this.angleZ = 0;
@@ -45,12 +43,6 @@ class Box{
     //changing origin
     translate(this.x, this.y, this.z);
 
-    // //rotation
-    // rotateX(this.angleX);
-    // rotateY(this.angleY);
-    // rotateZ(this.angleZ);
-
-    fill("white");
     stroke(1);
     strokeWeight(5);
     //box(this.sideLength);
@@ -105,11 +97,10 @@ class Box{
 
     endShape();
     pop();
-  }
 
-  turnX(angleX){
-    createVector(this.x, this.y, this.z);
+    push();
     
+    pop();
   }
 };
 
@@ -126,7 +117,7 @@ function setup() {
         let y = j * sideLength - sideLength;
         let z = k * sideLength - sideLength;
         
-        boxes.push (new Box(x, y, z, sideLength, i, j, k));
+        boxes.push (new Box(x, y, z, sideLength));
       }
     }
   }
@@ -153,22 +144,23 @@ function addCubes(){
   for(let box of boxes){
     box.display();
   }
-
-
 }
 
 //keys and rotations(rubic notations)
 //https://jperm.net/3x3/moves - notations
 function keyPressed(){
 
-  //x
-  if (key === "x"){
-    for (let b of boxes){
-      if (b.i === 1){
-        b.angleX += HALF_PI/2;
-      }
-    }
-  }
+  // //x
+  // if (key === "x"){
+  //   for (let i = 0; i < boxes.length; i++){
+  //     if ( boxes[i].x / 50 === HALF_PI){
+  //       //b.angleX += HALF_PI/2;
+  //       boxes[i].y = grid[newPos][0] * 50;
+  //       boxes[i].z = grid[newPos][1] * 50;
+  //       boxes[i].rotateX(HALF_PI);
+  //     }
+  //   }
+  // }
 
   // //y
   // if (key === "y"){
