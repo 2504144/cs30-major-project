@@ -17,3 +17,20 @@ h1{
   font-family: "Kings";
   left: 27%;
 }
+
+h2{
+  color: #CCCCFF;
+  position: absolute;
+  font-size: 50px;
+  font-family: "Kings";
+  left: 25px;
+}
+
+ol{
+  color: #CCCCFF;
+  position: absolute;
+  font-size: 25px;
+  font-family: "Kings"; 
+  left: 0%;
+  padding: 95px;
+}

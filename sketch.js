@@ -23,7 +23,6 @@ let boxes = [];
 let sideLength = 75;
 let dimensions = 3;
 let r = sideLength / 2;
-let highlight = true;
 
 class Box{
   constructor(x, y, z, sideLength){
@@ -31,10 +30,16 @@ class Box{
     this.x = x;
     this.y = y;
     this.z = z;
-
-    this.angleX = 0;
-    this.angleY = 0;
-    this.angleZ = 0;
+    
+    //let the faces have there own numbers
+    this.face = [
+      new Face(createVector(0,0,1), color.get("front")),
+      new Face(createVector(0,0,-1), color.get("back")),
+      new Face(createVector(0,-1,0), color.get("up")),
+      new Face(createVector(0,1,0), color.get("down")), 
+      new Face(createVector(1,0,0), color.get("right")), 
+      new Face(createVector(-1,0,0), color.get("left")),
+    ];
   }
 
   display(){
@@ -48,61 +53,144 @@ class Box{
     //box(this.sideLength);
     
     //creating custom cube with beginShape function "adding color"
-    beginShape(QUADS);
+    //beginShape(QUADS);
 
     // 4 |||| faces
 
-    //z-axis
+    for (let f of this.face){
+      f.show();
+    }
+    // //z-axis
 
-    //add color
+    // //add color
 
-    fill(color.get("front"));
-    //setting coordinate for each tile
-    vertex(-r, -r, r);
-    vertex(r, -r, r);
-    vertex(r, r, r);
-    vertex(-r, r, r);
+    // fill(color.get("front"));
+    // //setting coordinate for each tile
+    // vertex(-r, -r, r);
+    // vertex(r, -r, r);
+    // vertex(r, r, r);
+    // vertex(-r, r, r);
 
-    fill(color.get("back"));
-    vertex(-r, -r, -r);
-    vertex(r, -r, -r);
-    vertex(r, r, -r);
-    vertex(-r, r, -r);
+    // fill(color.get("back"));
+    // vertex(-r, -r, -r);
+    // vertex(r, -r, -r);
+    // vertex(r, r, -r);
+    // vertex(-r, r, -r);
 
-    //y-axis
-    fill(color.get("up"));
-    vertex(-r, -r, -r);
-    vertex(r, -r, -r);
-    vertex(r, -r, r);
-    vertex(-r, -r, r);
+    // //y-axis
+    // fill(color.get("up"));
+    // vertex(-r, -r, -r);
+    // vertex(r, -r, -r);
+    // vertex(r, -r, r);
+    // vertex(-r, -r, r);
 
-    fill(color.get("down"));
-    vertex(-r, r, r);
-    vertex(r, r, r); 
-    vertex(r, r, -r);
-    vertex(-r, r, -r);
+    // fill(color.get("down"));
+    // vertex(-r, r, r);
+    // vertex(r, r, r); 
+    // vertex(r, r, -r);
+    // vertex(-r, r, -r);
 
-    //x-axis
-    fill(color.get("right"));
-    vertex(-r, -r, -r);
-    vertex(-r, r, -r);
-    vertex(-r, r, r);
-    vertex(-r, -r, r);
+    // //x-axis
+    // fill(color.get("right"));
+    // vertex(-r, -r, -r);
+    // vertex(-r, r, -r);
+    // vertex(-r, r, r);
+    // vertex(-r, -r, r);
     
-    fill(color.get("left"));
-    vertex(r, -r, -r);
-    vertex(r, r, -r);
-    vertex(r, r, r);
-    vertex(r, -r, r);
+    // fill(color.get("left"));
+    // vertex(r, -r, -r);
+    // vertex(r, r, -r);
+    // vertex(r, r, r);
+    // vertex(r, -r, r);
 
-    endShape();
-    pop();
-
-    push();
-    
+    // endShape();
     pop();
   }
+
+  //rotation
+  turnX(){
+    for (let f of this.face){
+      f.turnX(HALF_PI/2);
+    }
+  }
+  turnY(){
+    for (let f of this.face){
+      f.turnY(HALF_PI/2);
+    }
+  }
+  turnZ(){
+    for (let f of this.face){
+      f.turnZ(HALF_PI/2);
+    }
+  }
 };
+
+class Face{
+  constructor(v, c){
+
+    //postion
+    this.v = v;
+
+    //colour
+    this.c = c;
+  }
+
+  show(){
+    push();
+    fill(this.c);
+    rectMode(CENTER);
+
+    //making middle of each cube origin
+    translate(this.v.x * sideLength/2, this.v.y * sideLength/2, this.v.z * sideLength/2);
+
+    //placement
+    if(this.v.x > 0){
+      rotateY(-HALF_PI);
+    }
+    else if(this.v.x < 0){
+      rotateY(HALF_PI);
+    }
+    else if(this.v.y > 0){
+      rotateX(-HALF_PI);
+    }
+    else if(this.v.y < 0){
+      rotateX(HALF_PI);
+    }
+    else if(this.v.z < 0){
+      rotateY(PI);
+    }
+    square(0, 0, sideLength);
+
+    pop();
+  }
+
+  //rotation
+  turnX(angle){
+    //current X
+    let x = this.v.x;
+
+    //rotate face around X axis
+    let y = round(this.v.y * cos(angle) - this.v.z * sin(angle));
+    let z = round(this.v.y * sin(angle) + this.v.z * cos(angle));
+
+    //update positions of colours
+    this.v = createVector(x, y, z);
+  }
+
+  turnY(angle){
+    let y = this.v.y;
+    let x = round(this.v.x * cos(angle) - this.v.z * sin(angle));
+    let z = round(this.v.x * sin(angle) + this.v.z * cos(angle));
+    this.v = createVector(x, y, z);
+  }
+
+  turnZ(angle){
+    let z = this.v.z;
+    let x = round(this.v.x * cos(angle) - this.v.y * sin(angle));
+    let y = round(this.v.x * sin(angle) + this.v.y * cos(angle));
+    this.v = createVector(x, y, z);
+  }
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
@@ -150,172 +238,37 @@ function addCubes(){
 //https://jperm.net/3x3/moves - notations
 function keyPressed(){
 
-  // //x
-  // if (key === "x"){
-  //   for (let i = 0; i < boxes.length; i++){
-  //     if ( boxes[i].x / 50 === HALF_PI){
-  //       //b.angleX += HALF_PI/2;
-  //       boxes[i].y = grid[newPos][0] * 50;
-  //       boxes[i].z = grid[newPos][1] * 50;
-  //       boxes[i].rotateX(HALF_PI);
-  //     }
-  //   }
-  // }
+  //x
+  if (key === "x"){
+    for (let box of boxes){
+      if (box.x === sideLength){
+        box.turnX();
+      }
+    }
+  }
+  if (key === "X"){
+    for (let box of boxes){
+      if (box.x === sideLength){
+        box.turnX(-HALF_PI);
+      }
+    }
+  }
 
-  // //y
-  // if (key === "y"){
-    
-  //   //goes through the grid of cubes
-  //   for (let b of boxes){
-  //     if (b.j === 1){
+  //y
+  if (key === "y"){
+    for (let box of boxes){
+      if (box.y === 0){
+        box.turnY();
+      }
+    }
+  }
 
-  //       //half_pi 90 degrees
-  //       b.angleY += HALF_PI;
-  //     }
-  //   }
-  // }
-  // // z
-  // if (key === "z"){
-  //   for (let b of boxes){
-  //     if (b.k === 1){
-  //       b.angleZ += HALF_PI;
-  //     }
-  //   }
-  // }
-
-  // // u
-  // if (key === "u"){
-  //   for (let b of boxes){
-  //     if (b.j === 0){
-  //       b.angleY += HALF_PI;
-  //     }
-  //   }
-  // }
-
-  // //r
-  // if (key === "r"){
-  //   for (let b of boxes){
-  //     if (b.j === 0){
-  //       b.angleY -= HALF_PI;
-  //     }
-  //   }
-  // }
-
-  // //d
-  // if (key === "d"){
-  //   for (let b of boxes){
-  //     if (b.k === 2){
-  //       b.angleZ += HALF_PI;
-  //     }
-  //   }
-  // }
-
-  // //l
-  // if (key === "l"){
-  //   for (let b of boxes){
-  //     if (b.j === 2){
-  //       b.angleY += HALF_PI;
-  //     }
-  //   }
-  // }
-
-  // //f
-  // if (key === "f"){
-  //   for (let b of boxes){
-  //     if (b.i === 0){
-  //       b.angleX -= HALF_PI;
-  //     }
-  //   }
-  // }
-
-  // //b
-  // if (key === "b"){
-  //   for (let b of boxes){
-  //     if (b.i === 2){
-  //       b.angleX += HALF_PI;
-  //     }
-  //   }
-  // }
-  
-  // //oppisite turn use capitalised
-
-  // //X
-  // if (key === "X"){
-  //   for (let b of boxes){
-  //     if (b.i === 1){
-  //       b.angleX -= HALF_PI;
-  //     }
-  //   }
-  // }
-
-  // // Y
-  // if (key === "Y"){
-  //   for (let b of boxes){
-  //     if (b.j === 1){
-  //       b.angleY -= HALF_PI;
-  //     }
-  //   }
-  // }
-
-  // //Z
-  // if (key === "Z"){
-  //   for (let b of boxes){
-  //     if (b.k === 1){
-  //       b.angleZ -= HALF_PI;
-  //     }
-  //   }
-  // }
-
-  // // U
-  // if (key === "U"){
-  //   for (let b of boxes){
-  //     if (b.j === 0){
-  //       b.angleY -= HALF_PI;
-  //     }
-  //   }
-  // }
-
-  // //R
-  // if (key === "R"){
-  //   for (let b of boxes){
-  //     if (b.j === 0){
-  //       b.angleY += HALF_PI;
-  //     }
-  //   }
-  // }
-
-  // //D
-  // if (key === "D"){
-  //   for (let b of boxes){
-  //     if (b.k === 2){
-  //       b.angleZ -= HALF_PI;
-  //     }
-  //   }
-  // }
-
-  // //L
-  // if (key === "L"){
-  //   for (let b of boxes){
-  //     if (b.j === 2){
-  //       b.angleY -= HALF_PI;
-  //     }
-  //   }
-  // }
-  // //f
-  // if (key === "F"){
-  //   for (let b of boxes){
-  //     if (b.i === 0){
-  //       b.angleX += HALF_PI;
-  //     }
-  //   }
-  // }
-
-  // //B
-  // if (key === "B"){
-  //   for (let b of boxes){
-  //     if (b.i === 2){
-  //       b.angleX -= HALF_PI;
-  //     }
-  //   }
-  // }
+  //z
+  if (key === "z"){
+    for (let box of boxes){
+      if (box.z === 0){
+        box.turnZ();
+      }
+    }
+  }
 }
