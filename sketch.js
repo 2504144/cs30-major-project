@@ -40,6 +40,14 @@ class Box{
       new Face(createVector(1,0,0), color.get("right")), 
       new Face(createVector(-1,0,0), color.get("left")),
     ];
+
+    //OG version
+    // fill(color.get("front"));
+    // //setting coordinate for each tile
+    // vertex(-r, -r, r);
+    // vertex(r, -r, r);
+    // vertex(r, r, r);
+    // vertex(-r, r, r);
   }
 
   display(){
@@ -60,67 +68,25 @@ class Box{
     for (let f of this.face){
       f.show();
     }
-    // //z-axis
 
-    // //add color
 
-    // fill(color.get("front"));
-    // //setting coordinate for each tile
-    // vertex(-r, -r, r);
-    // vertex(r, -r, r);
-    // vertex(r, r, r);
-    // vertex(-r, r, r);
-
-    // fill(color.get("back"));
-    // vertex(-r, -r, -r);
-    // vertex(r, -r, -r);
-    // vertex(r, r, -r);
-    // vertex(-r, r, -r);
-
-    // //y-axis
-    // fill(color.get("up"));
-    // vertex(-r, -r, -r);
-    // vertex(r, -r, -r);
-    // vertex(r, -r, r);
-    // vertex(-r, -r, r);
-
-    // fill(color.get("down"));
-    // vertex(-r, r, r);
-    // vertex(r, r, r); 
-    // vertex(r, r, -r);
-    // vertex(-r, r, -r);
-
-    // //x-axis
-    // fill(color.get("right"));
-    // vertex(-r, -r, -r);
-    // vertex(-r, r, -r);
-    // vertex(-r, r, r);
-    // vertex(-r, -r, r);
-    
-    // fill(color.get("left"));
-    // vertex(r, -r, -r);
-    // vertex(r, r, -r);
-    // vertex(r, r, r);
-    // vertex(r, -r, r);
-
-    // endShape();
     pop();
   }
 
   //rotation
   turnX(){
     for (let f of this.face){
-      f.turnX(HALF_PI/2);
+      f.turnX(HALF_PI / 2);
     }
   }
   turnY(){
     for (let f of this.face){
-      f.turnY(HALF_PI/2);
+      f.turnY(HALF_PI / 2);
     }
   }
   turnZ(){
     for (let f of this.face){
-      f.turnZ(HALF_PI/2);
+      f.turnZ(HALF_PI / 2);
     }
   }
 };
@@ -169,7 +135,7 @@ class Face{
     //current X
     let x = this.v.x;
 
-    //rotate face around X axis
+    //rotate face around X axis (corners)
     let y = round(this.v.y * cos(angle) - this.v.z * sin(angle));
     let z = round(this.v.y * sin(angle) + this.v.z * cos(angle));
 
@@ -224,16 +190,6 @@ function windowResize(){
   resizeCanvas(windowWidth, windowHeight);
 }
 
-function addCubes(){
-
-  //able to move while mouse dragged
-  orbitControl(2, 2, 2);
-
-  for(let box of boxes){
-    box.display();
-  }
-}
-
 //keys and rotations(rubic notations)
 //https://jperm.net/3x3/moves - notations
 function keyPressed(){
@@ -242,6 +198,13 @@ function keyPressed(){
   if (key === "x"){
     for (let box of boxes){
       if (box.x === sideLength){
+        box.turnX();
+      }
+    }
+  }
+  if (key === "x"){
+    for (let box of boxes){
+      if (box.x === -sideLength){
         box.turnX();
       }
     }
@@ -257,7 +220,7 @@ function keyPressed(){
   //y
   if (key === "y"){
     for (let box of boxes){
-      if (box.y === 0){
+      if (box.y === sideLength){
         box.turnY();
       }
     }
@@ -266,9 +229,19 @@ function keyPressed(){
   //z
   if (key === "z"){
     for (let box of boxes){
-      if (box.z === 0){
+      if (box.z === sideLength){
         box.turnZ();
       }
     }
+  }
+}
+
+function addCubes(){
+
+  //able to move while mouse dragged
+  orbitControl(2, 2, 2);
+
+  for(let box of boxes){
+    box.display();
   }
 }
