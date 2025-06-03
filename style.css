@@ -7,6 +7,7 @@ canvas {
   display: block;
 }
 
+/* title */
 h1{
 
   /* color code - 204, 204, 255*/
@@ -18,19 +19,57 @@ h1{
   left: 27%;
 }
 
-h2{
+/* button */
+.dropbtn {
+  background-color: #CCCCFF;
+  font-family: "Kings";
+  color: #FFFFCC;
+  padding: 16px;
+  font-size: 30px;
+  font-style: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
   color: #CCCCFF;
   position: absolute;
   font-size: 50px;
   font-family: "Kings";
   left: 25px;
+  position: absolute;
+  display: inline-block;
 }
 
-ol{
+/* content on */
+.dropdown-content {
   color: #CCCCFF;
   position: absolute;
+
   font-size: 25px;
   font-family: "Kings"; 
-  left: 0%;
-  padding: 95px;
+  left: 20%;
+  padding: 95px;  
+  display: none;
+  max-width: 100%;
+  min-height: 100%;
+  /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+  padding: 12px 16px;
+  z-index: 1;
+  overflow: auto;
+}
+
+li {
+  list-style-type: square;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #FFFFCC;
+  color: #CCCCFF;
 }

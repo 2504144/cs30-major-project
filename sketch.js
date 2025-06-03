@@ -32,6 +32,8 @@ class Box{
     this.z = z;
     
     //let the faces have there own numbers
+    // 3 ||| faces
+
     this.face = [
       new Face(createVector(0,0,1), color.get("front")),
       new Face(createVector(0,0,-1), color.get("back")),
@@ -58,35 +60,28 @@ class Box{
 
     stroke(1);
     strokeWeight(5);
-    //box(this.sideLength);
-    
-    //creating custom cube with beginShape function "adding color"
-    //beginShape(QUADS);
-
-    // 4 |||| faces
 
     for (let f of this.face){
       f.show();
     }
 
-
     pop();
   }
 
   //rotation
-  turnX(){
+  turnX(angle){
     for (let f of this.face){
-      f.turnX(HALF_PI / 2);
+      f.turnX(angle);
     }
   }
-  turnY(){
+  turnY(angle){
     for (let f of this.face){
-      f.turnY(HALF_PI / 2);
+      f.turnY(angle);
     }
   }
-  turnZ(){
+  turnZ(angle){
     for (let f of this.face){
-      f.turnZ(HALF_PI / 2);
+      f.turnZ(angle);
     }
   }
 };
@@ -109,7 +104,7 @@ class Face{
     //making middle of each cube origin
     translate(this.v.x * sideLength/2, this.v.y * sideLength/2, this.v.z * sideLength/2);
 
-    //placement
+    //direction
     if(this.v.x > 0){
       rotateY(-HALF_PI);
     }
@@ -130,7 +125,7 @@ class Face{
     pop();
   }
 
-  //rotation
+  //rotation around axis
   turnX(angle){
     //current X
     let x = this.v.x;
@@ -143,6 +138,7 @@ class Face{
     this.v = createVector(x, y, z);
   }
 
+  //y
   turnY(angle){
     let y = this.v.y;
     let x = round(this.v.x * cos(angle) - this.v.z * sin(angle));
@@ -150,6 +146,7 @@ class Face{
     this.v = createVector(x, y, z);
   }
 
+  //z
   turnZ(angle){
     let z = this.v.z;
     let x = round(this.v.x * cos(angle) - this.v.y * sin(angle));
@@ -198,21 +195,7 @@ function keyPressed(){
   if (key === "x"){
     for (let box of boxes){
       if (box.x === sideLength){
-        box.turnX();
-      }
-    }
-  }
-  if (key === "x"){
-    for (let box of boxes){
-      if (box.x === -sideLength){
-        box.turnX();
-      }
-    }
-  }
-  if (key === "X"){
-    for (let box of boxes){
-      if (box.x === sideLength){
-        box.turnX(-HALF_PI);
+        box.turnX(HALF_PI);
       }
     }
   }
@@ -221,7 +204,7 @@ function keyPressed(){
   if (key === "y"){
     for (let box of boxes){
       if (box.y === sideLength){
-        box.turnY();
+        box.turnY(HALF_PI);      
       }
     }
   }
@@ -230,8 +213,8 @@ function keyPressed(){
   if (key === "z"){
     for (let box of boxes){
       if (box.z === sideLength){
-        box.turnZ();
-      }
+        box.turnZ(HALF_PI);   
+      }   
     }
   }
 }
