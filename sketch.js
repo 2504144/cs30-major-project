@@ -193,31 +193,106 @@ function keyPressed(){
 
   //x
   if (key === "x"){
-    for (let box of boxes){
-      if (box.x === sideLength){
-        box.turnX(HALF_PI);
-      }
-    }
+    turnLayerX(2);
   }
 
   //y
   if (key === "y"){
-    for (let box of boxes){
-      if (box.y === sideLength){
-        box.turnY(HALF_PI);      
-      }
-    }
+    turnLayerY(2);
   }
 
   //z
   if (key === "z"){
-    for (let box of boxes){
-      if (box.z === sideLength){
-        box.turnZ(HALF_PI);   
-      }   
-    }
+    turnLayerZ(2);
   }
 }
+
+//x face
+function turnLayerX(xPosition){
+  let layer = [];
+
+  for (let b of boxes){
+    if (b.x === xPosition * sideLength - sideLength){
+      layer.push(b);
+    }
+  }
+
+  //going through boxes on face
+  for (let b of layer){
+
+    //change to grid positions
+    let y = (b.y + sideLength) / sideLength;
+    let z = (b.z + sideLength) / sideLength;
+
+    //rotate 90 degrees
+    let newY = 2 - z;
+    let newZ = y;
+
+    //change back to normal positions
+    b.y = (newY - 1) * sideLength;
+    b.z = (newZ - 1) * sideLength;
+
+    //rotation from before
+    b.turnX(HALF_PI);
+    //OG version
+    // for (let box of boxes){
+    //   if (box.x === sideLength){
+    //     box.turnX(HALF_PI);
+    //   }
+    // }
+  }
+}
+
+//y face
+function turnLayerY(yPosition){
+  let layer = [];
+
+  for (let b of boxes){
+    if (b.y === yPosition * sideLength - sideLength){
+      layer.push(b);
+    }
+  }
+
+  for (let b of layer){
+
+    let x = (b.x + sideLength) / sideLength;
+    let z = (b.z + sideLength) / sideLength;
+
+    let newY = 2 - z;
+    let newZ = x;
+
+    b.x = (newY - 1) * sideLength;
+    b.z = (newZ - 1) * sideLength;
+
+    b.turnY(HALF_PI);
+  }
+}
+
+//y face
+function turnLayerZ(zPosition){
+  let layer = [];
+
+  for (let b of boxes){
+    if (b.z === zPosition * sideLength - sideLength){
+      layer.push(b);
+    }
+  }
+
+  for (let b of layer){
+
+    let x = (b.x + sideLength) / sideLength;
+    let y = (b.y + sideLength) / sideLength;
+
+    let newX = 2 - y;
+    let newY = x;
+
+    b.x = (newX - 1) * sideLength;
+    b.y = (newY - 1) * sideLength;
+
+    b.turnZ(HALF_PI);
+  }
+}
+
 
 function addCubes(){
 
