@@ -11,18 +11,21 @@
 
 //colors
 let color = new Map();
-color.set("front", "white");
-color.set("back", "yellow");
-color.set("right", "blue");
-color.set("left", "green");
-color.set("up", "red");
-color.set("down", "orange");
+color.set("up", "#fff700");//yellow
+color.set("down", "#ffffff");//white
+color.set("front", "#33daff");//blue
+color.set("back", "#27ff00");//green
+color.set("left", "#ff0000");//red
+color.set("right", "#ff6400");//orange
 
-
+//cube creation
 let boxes = [];
 let sideLength = 75;
 let dimensions = 3;
 let r = sideLength / 2;
+
+//side navigation
+let dropdown = document.getElementsByClassName("dropdown-btn");
 
 class Box{
   constructor(x, y, z, sideLength){
@@ -191,26 +194,75 @@ function windowResize(){
 //https://jperm.net/3x3/moves - notations
 function keyPressed(){
 
-  //x
-  if (key === "x"){
+  //for X axis: 0 - left, 1 - middle, 2 - right
+  //r
+  if (key === "r"){
     turnLayerX(2);
   }
 
-  //y
-  if (key === "y"){
+  //r'
+  if (key === "R"){
+    turnLayerXCounterClockwise(2);
+  }
+
+  //l
+  if (key === "l"){
+    turnLayerXCounterClockwise(0);
+  }
+
+  //l'
+  if (key === "L"){
+    turnLayerX(0);
+  }
+
+  //for Y axis: 0 - top, 1 - middle, 2 - bottom
+  //u
+  if (key === "u"){
+    turnLayerY(0);
+  }
+
+  //u'
+  if (key === "U"){
+    turnLayerYCounterClockwise(0);
+  }
+
+  //d
+  if (key === "d"){
+    turnLayerYCounterClockwise(2);
+  }
+
+  //d'
+  if (key === "D"){
     turnLayerY(2);
   }
 
-  //z
-  if (key === "z"){
+  //for Z axis: 0 - back, 1 - middle, 2 - front
+  //f
+  if (key === "f"){
     turnLayerZ(2);
+  }
+
+  //f'
+  if (key === "F"){
+    turnLayerZCounterClockwise(2);
+  }
+
+  //b
+  if (key === "b"){
+    turnLayerZCounterClockwise(0);
+  }
+
+  //b'
+  if (key === "B"){
+    turnLayerZ(0);
   }
 }
 
-//x face
+//x face - clock wise
 function turnLayerX(xPosition){
   let layer = [];
 
+  //pushes each singular face onto the list and keeps track of colour
   for (let b of boxes){
     if (b.x === xPosition * sideLength - sideLength){
       layer.push(b);
@@ -224,16 +276,16 @@ function turnLayerX(xPosition){
     let y = (b.y + sideLength) / sideLength;
     let z = (b.z + sideLength) / sideLength;
 
-    //rotate 90 degrees
-    let newY = 2 - z;
-    let newZ = y;
+    //rotate 90 degrees - switch around to turn opposite way
+    let newY = 2 - z;     //let newY = z;
+    let newZ = y;         //let newZ = 2 - y;
 
     //change back to normal positions
     b.y = (newY - 1) * sideLength;
     b.z = (newZ - 1) * sideLength;
 
     //rotation from before
-    b.turnX(HALF_PI);
+    b.turnX(HALF_PI); //oppisite - b.turnX(-HALF_PI);
     //OG version
     // for (let box of boxes){
     //   if (box.x === sideLength){
@@ -243,7 +295,32 @@ function turnLayerX(xPosition){
   }
 }
 
-//y face
+//x face - counterclockwise
+function turnLayerXCounterClockwise(xPosition){
+  let layer = [];
+
+  for (let b of boxes){
+    if (b.x === xPosition * sideLength - sideLength){
+      layer.push(b);
+    }
+  }
+
+  for (let b of layer){
+
+    let y = (b.y + sideLength) / sideLength;
+    let z = (b.z + sideLength) / sideLength;
+
+    let newY = z;
+    let newZ = 2 - y;
+
+    b.y = (newY - 1) * sideLength;
+    b.z = (newZ - 1) * sideLength;
+
+    b.turnX(-HALF_PI);
+  }
+}
+
+//Y face - clockwise
 function turnLayerY(yPosition){
   let layer = [];
 
@@ -268,7 +345,32 @@ function turnLayerY(yPosition){
   }
 }
 
-//y face
+//Y face - counter clockwise
+function turnLayerYCounterClockwise(yPosition){
+  let layer = [];
+
+  for (let b of boxes){
+    if (b.y === yPosition * sideLength - sideLength){
+      layer.push(b);
+    }
+  }
+
+  for (let b of layer){
+
+    let x = (b.x + sideLength) / sideLength;
+    let z = (b.z + sideLength) / sideLength;
+
+    let newX = z;
+    let newZ = 2 - x;
+
+    b.x = (newX - 1) * sideLength;
+    b.z = (newZ - 1) * sideLength;
+
+    b.turnY(-HALF_PI);
+  }
+}
+
+//Z face
 function turnLayerZ(zPosition){
   let layer = [];
 
@@ -293,6 +395,31 @@ function turnLayerZ(zPosition){
   }
 }
 
+//Z face - counter clockwise
+function turnLayerZCounterClockwise(zPosition){
+  let layer = [];
+
+  for (let b of boxes){
+    if (b.z === zPosition * sideLength - sideLength){
+      layer.push(b);
+    }
+  }
+
+  for (let b of layer){
+
+    let x = (b.x + sideLength) / sideLength;
+    let y = (b.y + sideLength) / sideLength;
+
+    let newX = y;
+    let newY = 2 - x;
+
+    b.x = (newX - 1) * sideLength;
+    b.y = (newY - 1) * sideLength;
+
+    b.turnZ(-HALF_PI);
+  }
+}
+
 
 function addCubes(){
 
@@ -301,5 +428,13 @@ function addCubes(){
 
   for(let box of boxes){
     box.display();
+  }
+}
+
+//buttons on sidebar
+
+function sideNav(){
+  for (let i = 0; i < dropdown.length; i++){
+    //continue from here
   }
 }
