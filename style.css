@@ -21,7 +21,7 @@ h1{
 /* Controls / Notation*/
 .sidenav {
   height: 100%;
-  width: 200px;
+  width: 225px;
   position: absolute;
   z-index: 1;
   top: 0;
@@ -31,13 +31,30 @@ h1{
   background-color: #CCCCFF;
 }
 
+.control-btn{
+  display: block;
+  background-color: #CCCCFF;
+  font-family: "Kings";
+  color: #FFFFCC;
+  font-size: xx-large;
+  padding: 25px 15px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+
+  /* keeps it the opposite colour for a bit longer */
+  transition: background-color 0.3s;
+}
+
 .dropdown-btn {
   display: block;
   background-color: #CCCCFF;
   font-family: "Kings";
   color: #FFFFCC;
-  font-size: larger;
-  padding: 22px 16px;
+  font-size: x-large;
+  padding: 25px 15px;
   width: 100%;
   border: none;
   outline: none;
@@ -54,6 +71,7 @@ h1{
   color: #CCCCFF;
 }
 
+/* keeps it this colour*/
 .active {
   background-color: #FFFFCC;
   color: #CCCCFF;
@@ -63,11 +81,19 @@ h1{
   display: none;
   background-color: #CCCCFF;
   color: #FFFFCC;
-  padding-left: 10px;
+  padding-left: middle;
+  font-size: large;
 }
 
-.fa-caret-down {
-  float: right;
-  padding-right: 8px;
+.arrow{
   color: #FFFFCC;
+  float: middle, right;
+  padding-right: 8px;
+  width: 16px;
+}
+
+.arrow .active .dropdown-btn{
+  float: middle, right;
+  padding-right: 8px;
+  width: 16px;
 }

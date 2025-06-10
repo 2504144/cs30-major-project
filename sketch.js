@@ -24,9 +24,6 @@ let sideLength = 75;
 let dimensions = 3;
 let r = sideLength / 2;
 
-//side navigation
-let dropdown = document.getElementsByClassName("dropdown-btn");
-
 class Box{
   constructor(x, y, z, sideLength){
     this.sideLength = sideLength;
@@ -175,6 +172,8 @@ function setup() {
       }
     }
   }
+
+  sideNav();
 }
 
 function draw() {
@@ -431,10 +430,50 @@ function addCubes(){
   }
 }
 
-//buttons on sidebar
 
+//buttons on sidebar
 function sideNav(){
+
+  //connects HTML to here
+  let dropdown = document.getElementsByClassName("dropdown-btn");
+
+  let control = document.getElementsByClassName("control-btn");
+
+  for (let i = 0; i < control.length; i++){
+    
+    //each button
+    control[i].addEventListener("click", 
+      function() {
+
+        //if clicked
+        this.classList.toggle("active");
+
+        let dropdownContent = this.nextElementSibling;
+
+        //what shows
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } 
+        else {
+          dropdownContent.style.display = "block";
+        }
+      });
+  }
+
   for (let i = 0; i < dropdown.length; i++){
-    //continue from here
+    
+    dropdown[i].addEventListener("click", function() {
+
+      this.classList.toggle("active");
+
+      let dropdownContent = this.nextElementSibling;
+
+      if (dropdownContent.style.display === "block") {
+        dropdownContent.style.display = "none";
+      } 
+      else {
+        dropdownContent.style.display = "block";
+      }
+    });
   }
 }
