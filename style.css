@@ -31,7 +31,26 @@ h1{
   background-color: #CCCCFF;
 }
 
+/* controls */
 .control-btn{
+  display: block;
+  background-color: #CCCCFF;
+  font-family: "Kings";
+  color: #FFFFCC;
+  font-size: xx-large;
+  padding: 25px 15px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+
+  /* keeps it the opposite colour for a bit longer */
+  transition: background-color 0.3s;
+}
+
+/* notations */
+.notation-btn{
   display: block;
   background-color: #CCCCFF;
   font-family: "Kings";
@@ -83,6 +102,7 @@ h1{
   color: #FFFFCC;
   padding-left: middle;
   font-size: large;
+  font: bold;
 }
 
 .arrow{
@@ -96,4 +116,31 @@ h1{
   float: middle, right;
   padding-right: 8px;
   width: 16px;
+}
+
+/* id for r key */
+#r-key{
+  color: lightgrey;
+}
+
+input{
+  background-color: #FFFFCC;
+  color: #CCCCFF;
+  float: middle, inline-end;
+  font-size: large;
+  width: 25px;
+  border: none;
+}
+.set{
+  background-color: #CCCCFF;
+  color: #FFFFCC;
+  padding-left: right;
+  font-size: large;
+  border-color: #FFFFCC;
+}
+
+.img{
+  position: inline;
+  float: middle;
+  max-width: 100%;
 }

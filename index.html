@@ -30,35 +30,50 @@
     <h1>Rubicks Cube Simulator</h1> <!-- title -->
     <div class="sidenav">
       <div class="dropdown">
+
+        <!-- https://jperm.net/3x3/moves - notations -->
         <button class="control-btn">Controls
           <img class="arrow" src="down.png" alt="downarrow">
         </button>
         <div class="dropdown-container">
 
+            <!--CLockwise -->
             <button class="dropdown-btn">Clockwise
               <img class="arrow" src="down.png" alt="downarrow">
             </button>
 
-            <ul class="dropdown-container">
-                <li>r</li>
-                <li>L</li>
-                <li>u</li>
-                <li>D</li>
-                <li>f</li>
-                <li>B</li>
-            </ul>
+            <ol class="dropdown-container">
+              <li>r: <input type="text" id="r key" name="r key"><button class="set" value="r">Set </button> </li>
+              <li>l: <input type="text" id="l key" name="l key"><button class="set" value="l">Set </button> </li>
+              <li>u: <input type="text" id="u key" name="u key"><button class="set" value="u">Set </button> </li>
+              <li>d: <input type="text" id="d key" name="d key"><button class="set" value="d">Set </button> </li>
+              <li>f: <input type="text" id="f key" name="f key"><button class="set" value="f">Set </button> </li>
+              <li>b: <input type="text" id="b key" name="b key"><button class="set" value="b">Set </button> </li>
+            </ol>
 
+            <!-- Counter-CLockwise -->
             <button class="dropdown-btn">Counter-Clockwise
               <img class="arrow" src="down.png" alt="downarrow">
             </button>
-            <ul class="dropdown-container">
-                <li>r</li>
-                <li>L</li>
-                <li>u</li>
-                <li>D</li>
-                <li>f</li>
-                <li>B</li>
-            </ul>
+            <ol class="dropdown-container">
+              <li>r': <input type="text" id="r' key" name="r' key"><button class="set" value="R">Set </button> </li>
+              <li>l': <input type="text" id="l' key" name="l' key"><button class="set" value="L">Set </button> </li>
+              <li>u': <input type="text" id="u' key" name="u' key"><button class="set" value="U">Set </button> </li>
+              <li>d': <input type="text" id="d' key" name="d' key"><button class="set" value="D">Set </button> </li>
+              <li>f': <input type="text" id="f' key" name="f' key"><button class="set" value="F">Set </button> </li>
+              <li>b': <input type="text" id="b' key" name="b' key"><button class="set" value="B">Set </button> </li>
+            </ol>
+        </div>
+
+        <!-- notation -->
+        <button class="notation-btn">Notations
+          <img class="arrow" src="down.png" alt="downarrow">
+        </button>
+
+        <!-- images -->
+        <div class="dropdown-container">
+          <img src="clockwise-rotations.png" alt="clockwise-rotations" class="move img">
+          <img src="counter-clockwise-rotations.png" alt="counter-clockwise-rotations" class="move img">
         </div>
       </div>
     </div>
