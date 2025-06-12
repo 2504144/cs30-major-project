@@ -4,7 +4,7 @@
 //
 // Extra for Experts:
 // - I learnt about 3D arrays
-// - Used orbitControl function added it to set up first but it does work in draw function
+// - Used orbitControl function
 
 
 //nice reference - https://www.youtube.com/watch?v=W24xhB9PO54
@@ -27,7 +27,7 @@ let r = sideLength / 2;
 //key binds
 const defaultKeys = ["r", "R","l", "L","u", "U","d", "D","f", "F","b", "B"];
 
-//animation
+//animation - not done yet
 let animate = false;
 let speed = 0.2;
 let angle = 0;
@@ -117,18 +117,23 @@ class Face{
     if(this.v.x > 0){
       rotateY(-HALF_PI);
     }
+
     else if(this.v.x < 0){
       rotateY(HALF_PI);
     }
+
     else if(this.v.y > 0){
       rotateX(-HALF_PI);
     }
+
     else if(this.v.y < 0){
       rotateX(HALF_PI);
     }
+
     else if(this.v.z < 0){
       rotateY(PI);
     }
+
     square(0, 0, sideLength);
 
     pop();
@@ -182,6 +187,7 @@ function setup() {
     }
   }
 
+  //side navigation
   sideNav();
 }
 
@@ -190,19 +196,18 @@ function draw() {
   background(255, 255, 204);//color code - #FFFFCC
 
   addCubes();
-  //selection();
 }
 
 //window resizing
-function windowResize(){
+function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
 }
 
 //keys and rotations(rubic notations)
-//https://jperm.net/3x3/moves - notations
 function keyPressed(){
 
   //for X axis: 0 - left, 1 - middle, 2 - right
+
   //r
   if (key === defaultKeys[0]){
     turnLayerX(2);
@@ -442,14 +447,19 @@ function addCubes(){
 
 //buttons on sidebar
 function sideNav(){
+  control();
+  notation();
+  dropdown();
 
-  //connects HTML to here
-  let dropdown = document.getElementsByClassName("dropdown-btn");
+  //working on these
+  // setButton();
+  // keySystem();
+}
 
+function control(){
+  //connect from HTML to JS
   let control = document.getElementsByClassName("control-btn");
-
-  let notation = document.getElementsByClassName("notation-btn");
-
+  
   for (let i = 0; i < control.length; i++){
     
     //each button
@@ -470,19 +480,20 @@ function sideNav(){
         }
       });
   }
+}
+
+function notation(){
+  let notation = document.getElementsByClassName("notation-btn");
 
   for (let i = 0; i < notation.length; i++){
     
-    //each button
     notation[i].addEventListener("click", 
       function() {
 
-        //if clicked
         this.classList.toggle("active");
 
         let dropdownContent = this.nextElementSibling;
 
-        //what shows
         if (dropdownContent.style.display === "block") {
           dropdownContent.style.display = "none";
         } 
@@ -491,6 +502,10 @@ function sideNav(){
         }
       });
   }
+}
+
+function dropdown(){
+  let dropdown = document.getElementsByClassName("dropdown-btn");
 
   for (let i = 0; i < dropdown.length; i++){
     
@@ -507,5 +522,57 @@ function sideNav(){
         dropdownContent.style.display = "block";
       }
     });
+  }
+}
+
+//when set button clicked
+function setButton(){
+  let set = document.getElementByClass("set");
+
+  for (let i = 0; i < set.length; i++){
+    
+    //each button
+    set[i].addEventListener("click", 
+      function() {
+
+        //if clicked
+        this.classList.toggle("active");
+
+        let dropdownContent = this.nextElementSibling;
+
+        //what shows
+        if (input.toggle === "active") {
+          return input();
+        } 
+        else {
+          dropdownContent.style.display = "block";
+        }
+      });
+  }
+}
+
+//if key is changed
+function keySystem(){
+  let key = document.getElementById("r-key");
+
+  for (let i = 0; i < key.length; i++){
+    
+    //each button
+    key[i].addEventListener("click", 
+      function() {
+
+        //if clicked
+        this.classList.toggle("active");
+
+        let dropdownContent = this.nextElementSibling;
+
+        //what shows
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } 
+        else {
+          dropdownContent.style.display = "block";
+        }
+      });
   }
 }

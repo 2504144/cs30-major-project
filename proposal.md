@@ -5,11 +5,12 @@ I am planning on building a 3x3 rubics cube simulation. This simulation will be 
 
 ## Needs To Have List
 - 1) Logic of Rubics Cube!!(done)
-- 3D array(create a cube)(done)
+- 2) 3D array(create a cube)(done)
 - 3) Rubics Cube is able to rotate(done)
 - 4) Use Rotate Translate to clean up the look
 
 ## Nice To Have List
+- Changable controls
 - Timer for when completed
 - Have a nice loading screen and make apperance more appealing
 - Self solver and records all steps
