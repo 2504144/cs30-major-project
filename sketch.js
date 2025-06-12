@@ -439,10 +439,33 @@ function sideNav(){
 
   let control = document.getElementsByClassName("control-btn");
 
+  let notation = document.getElementsByClassName("notation-btn");
+
   for (let i = 0; i < control.length; i++){
     
     //each button
     control[i].addEventListener("click", 
+      function() {
+
+        //if clicked
+        this.classList.toggle("active");
+
+        let dropdownContent = this.nextElementSibling;
+
+        //what shows
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } 
+        else {
+          dropdownContent.style.display = "block";
+        }
+      });
+  }
+
+  for (let i = 0; i < notation.length; i++){
+    
+    //each button
+    notation[i].addEventListener("click", 
       function() {
 
         //if clicked
