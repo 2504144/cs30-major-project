@@ -101,7 +101,7 @@ h1{
   background-color: #CCCCFF;
   color: #FFFFCC;
   padding-left: middle;
-  font-size: large;
+  font-size: x-large;
   font: bold;
 }
 
@@ -143,4 +143,9 @@ input{
   position: inline;
   float: middle;
   max-width: 300px;
+}
+
+::placeholder{
+  color: lightgray;
+  float: middle;
 }

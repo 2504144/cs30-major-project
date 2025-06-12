@@ -24,6 +24,15 @@ let sideLength = 75;
 let dimensions = 3;
 let r = sideLength / 2;
 
+//key binds
+const defaultKeys = ["r", "R","l", "L","u", "U","d", "D","f", "F","b", "B"];
+
+//animation
+let animate = false;
+let speed = 0.2;
+let angle = 0;
+
+
 class Box{
   constructor(x, y, z, sideLength){
     this.sideLength = sideLength;
@@ -195,64 +204,64 @@ function keyPressed(){
 
   //for X axis: 0 - left, 1 - middle, 2 - right
   //r
-  if (key === "r"){
+  if (key === defaultKeys[0]){
     turnLayerX(2);
   }
 
   //r'
-  if (key === "R"){
+  if (key === defaultKeys[1]){
     turnLayerXCounterClockwise(2);
   }
 
   //l
-  if (key === "l"){
+  if (key === defaultKeys[2]){
     turnLayerXCounterClockwise(0);
   }
 
   //l'
-  if (key === "L"){
+  if (key === defaultKeys[3]){
     turnLayerX(0);
   }
 
   //for Y axis: 0 - top, 1 - middle, 2 - bottom
   //u
-  if (key === "u"){
+  if (key === defaultKeys[4]){
     turnLayerY(0);
   }
 
   //u'
-  if (key === "U"){
+  if (key === defaultKeys[5]){
     turnLayerYCounterClockwise(0);
   }
 
   //d
-  if (key === "d"){
+  if (key === defaultKeys[6]){
     turnLayerYCounterClockwise(2);
   }
 
   //d'
-  if (key === "D"){
+  if (key === defaultKeys[7]){
     turnLayerY(2);
   }
 
   //for Z axis: 0 - back, 1 - middle, 2 - front
   //f
-  if (key === "f"){
+  if (key === defaultKeys[8]){
     turnLayerZ(2);
   }
 
   //f'
-  if (key === "F"){
+  if (key === defaultKeys[9]){
     turnLayerZCounterClockwise(2);
   }
 
   //b
-  if (key === "b"){
+  if (key === defaultKeys[10]){
     turnLayerZCounterClockwise(0);
   }
 
   //b'
-  if (key === "B"){
+  if (key === defaultKeys[11]){
     turnLayerZ(0);
   }
 }
