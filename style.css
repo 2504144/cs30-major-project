@@ -48,6 +48,10 @@ h1{
   /* keeps it the opposite colour for a bit longer */
   transition: background-color 0.3s;
 }
+.control-btn:hover {
+  background-color: #FFFFCC;
+  color: #CCCCFF;
+}
 
 /* notations */
 .notation-btn{
@@ -65,6 +69,11 @@ h1{
 
   /* keeps it the opposite colour for a bit longer */
   transition: background-color 0.3s;
+}
+
+.notation-btn:hover {
+  background-color: #FFFFCC;
+  color: #CCCCFF;
 }
 
 .dropdown-btn {
@@ -118,11 +127,6 @@ h1{
   width: 16px;
 }
 
-/* id for r key */
-#r-key{
-  color: lightgrey;
-}
-
 input{
   background-color: #FFFFCC;
   color: #CCCCFF;
@@ -131,7 +135,8 @@ input{
   width: 25px;
   border: none;
 }
-.set{
+
+.set-btn{
   background-color: #CCCCFF;
   color: #FFFFCC;
   padding-left: right;
@@ -148,4 +153,26 @@ input{
 ::placeholder{
   color: lightgray;
   float: middle;
+}
+
+.solve-btn{
+  display: block;
+  background-color: #CCCCFF;
+  font-family: "Kings";
+  color: #FFFFCC;
+  font-size: xx-large;
+  padding: 25px 15px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+
+  /* keeps it the opposite colour for a bit longer */
+  transition: background-color 0.3s;
+}
+
+.solve-btn:hover {
+  background-color: #FFFFCC;
+  color: #CCCCFF;
 }

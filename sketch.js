@@ -25,7 +25,22 @@ let dimensions = 3;
 let r = sideLength / 2;
 
 //key binds
-const defaultKeys = ["r", "R","l", "L","u", "U","d", "D","f", "F","b", "B"];
+let keyBinds = new Map();
+keyBinds.set("r", "r");
+keyBinds.set("l", "l");
+keyBinds.set("u", "u");
+keyBinds.set("d", "d");
+keyBinds.set("f", "f");
+keyBinds.set("b", "b");
+keyBinds.set("r'", "R");
+keyBinds.set("l'", "L");
+keyBinds.set("u'", "U");
+keyBinds.set("d'", "D");
+keyBinds.set("f'", "F");
+keyBinds.set("b'", "B");
+
+//Solve
+let listOfMoves = [];
 
 //animation - not done yet
 let animate = false;
@@ -209,65 +224,77 @@ function keyPressed(){
   //for X axis: 0 - left, 1 - middle, 2 - right
 
   //r
-  if (key === defaultKeys[0]){
+  if (key === keyBinds.get("r")){
     turnLayerX(2);
+    listOfMoves.push("r");
   }
 
   //r'
-  if (key === defaultKeys[1]){
+  if (key === keyBinds.get("r'")){
     turnLayerXCounterClockwise(2);
+    listOfMoves.push("R");
   }
 
   //l
-  if (key === defaultKeys[2]){
+  if (key === keyBinds.get("l")){
     turnLayerXCounterClockwise(0);
+    listOfMoves.push("l");
   }
 
   //l'
-  if (key === defaultKeys[3]){
+  if (key === keyBinds.get("l'")){
     turnLayerX(0);
+    listOfMoves.push("L");
   }
 
   //for Y axis: 0 - top, 1 - middle, 2 - bottom
   //u
-  if (key === defaultKeys[4]){
+  if (key === keyBinds.get("u")){
     turnLayerY(0);
+    listOfMoves.push("u");
   }
 
   //u'
-  if (key === defaultKeys[5]){
+  if (key === keyBinds.get("u'")){
     turnLayerYCounterClockwise(0);
+    listOfMoves.push("U");
   }
 
   //d
-  if (key === defaultKeys[6]){
+  if (key === keyBinds.get("d")){
     turnLayerYCounterClockwise(2);
+    listOfMoves.push("d");
   }
 
   //d'
-  if (key === defaultKeys[7]){
+  if (key === keyBinds.get("d'")){
     turnLayerY(2);
+    listOfMoves.push("D");
   }
 
   //for Z axis: 0 - back, 1 - middle, 2 - front
   //f
-  if (key === defaultKeys[8]){
+  if (key === keyBinds.get("f")){
     turnLayerZ(2);
+    listOfMoves.push("f");
   }
 
   //f'
-  if (key === defaultKeys[9]){
+  if (key === keyBinds.get("f'")){
     turnLayerZCounterClockwise(2);
+    listOfMoves.push("F");
   }
 
   //b
-  if (key === defaultKeys[10]){
+  if (key === keyBinds.get("b")){
     turnLayerZCounterClockwise(0);
+    listOfMoves.push("b");
   }
 
   //b'
-  if (key === defaultKeys[11]){
+  if (key === keyBinds.get("b'")){
     turnLayerZ(0);
+    listOfMoves.push("B");
   }
 }
 
@@ -448,12 +475,14 @@ function addCubes(){
 //buttons on sidebar
 function sideNav(){
   control();
-  notation();
-  dropdown();
 
-  //working on these
-  // setButton();
-  // keySystem();
+  notation();
+
+  dropdown();
+  
+  setButton();
+
+  solve();
 }
 
 function control(){
@@ -527,51 +556,149 @@ function dropdown(){
 
 //when set button clicked
 function setButton(){
-  let set = document.getElementByClass("set");
 
+  //grabs element in set-btn class
+  let set = document.querySelectorAll(".set-btn");
+
+  //goes through each button
   for (let i = 0; i < set.length; i++){
     
-    //each button
+    //if button clicked
     set[i].addEventListener("click", 
       function() {
 
-        //if clicked
-        this.classList.toggle("active");
+        //localizes to this function
+        let each = this.parentElement;
+        
+        //get from maps
+        let changeCode = each.getAttribute("code");
 
-        let dropdownContent = this.nextElementSibling;
+        //select based on CSS
+        let input = each.querySelector(".input");
 
-        //what shows
-        if (input.toggle === "active") {
-          return input();
-        } 
-        else {
-          dropdownContent.style.display = "block";
+        //changing keybinds with maps
+        let updatedKey = keySystem(changeCode, input);
+
+        //OG key binds
+        let currentKey = keyBinds.get(changeCode);
+
+        //changes placeholder if already used
+        if (currentKey){
+          input.placeholder = currentKey;
+        }
+
+        //once changed
+        if (updatedKey){
+
+          //changes place holder
+          input.placeholder = updatedKey;
         }
       });
   }
 }
 
-//if key is changed
-function keySystem(){
-  let key = document.getElementById("r-key");
+//if key is changeable
+function keySystem(changeCode, input){
 
-  for (let i = 0; i < key.length; i++){
+  //making sure you dont just push empty value into keybinds(no white space)
+  let value = input.value.trim();
+
+
+  //only 1 singular letter
+  if (value.length === 1){
+
+    //goes through maps so dont have 1 key doing 2 things
+    for (let [code, assignedKey] of keyBinds){
+      if (code !== changeCode && assignedKey === value){
+
+        //tells user cant use key
+        alert("Already been taken.");
+
+        //reset input
+        input.value = "";
+        return null;
+      }
+    }
+
+    //update
+    keyBinds.set(changeCode, value);
+
+    //reset input so you can change again
+    input.value = "";
+
+    //different key
+    return value;
+  }
+  else{
+
+    //telling you if key didnt work
+    alert("You must have done something wrong, tsk tsk");
+
+    //take you input that dont work
+    input.value = "";
+
+    //didn't work
+    return null;
+  } 
+}
+
+function solve(){
+  let solve = document.getElementsByClassName("solve-btn");
+
+  for (let i = 0; i < solve.length; i++){
     
-    //each button
-    key[i].addEventListener("click", 
+    solve[i].addEventListener("click", 
       function() {
 
-        //if clicked
         this.classList.toggle("active");
 
-        let dropdownContent = this.nextElementSibling;
+        //reverse list 
+        let newList = listOfMoves.slice().reverse();
 
-        //what shows
-        if (dropdownContent.style.display === "block") {
-          dropdownContent.style.display = "none";
-        } 
-        else {
-          dropdownContent.style.display = "block";
+        //goes through list and undoes them
+        for (let j = 0;j < newList.length; j++){
+          let moves = newList[j];
+          if (moves === "r"){
+            turnLayerXCounterClockwise(2);
+          }
+          if (moves === "R"){
+            turnLayerX(2);
+          }
+          if (moves === "l"){
+            turnLayerX(0);
+          }
+          if (moves === "L"){
+            turnLayerXCounterClockwise(0);
+          }
+          if (moves === "u"){
+            turnLayerYCounterClockwise(0);
+          }
+          if (moves === "U"){
+            turnLayerY(0);
+          }
+          if (moves === "d"){
+            turnLayerY(2);
+          }
+          if (moves === "D"){
+            turnLayerYCounterClockwise(2);
+          }
+          if (moves === "f"){
+            turnLayerZCounterClockwise(0);
+          }
+          if (moves === "F"){
+            turnLayerZ(0);
+          }
+          if (moves === "b"){
+            turnLayerZ(2);
+          }
+          if (moves === "B"){
+            turnLayerZCounterClockwise(2);
+          }
+
+          //so it doesnt repeat
+          if (j === newList.length - 1) {
+            listOfMoves = [];
+          }        
         }
       });
   }
