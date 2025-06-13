@@ -43,7 +43,8 @@ h1{
 .play-btn .arrow{
   transform: translate(+50%, +50%);
   float: middle, right;
-  padding-right: 8px;
+  padding-top: 10px;
+  padding-left: 1px;
   width: 16px;
   rotate: 270deg;
 }
@@ -153,7 +154,7 @@ h1{
 .arrow{
   color: #FFFFCC;
   float: middle, right;
-  padding-right: 8px;
+  padding-left: 10px;
   width: 16px;
 }
 
@@ -213,6 +214,16 @@ input{
   color: #CCCCFF;
 }
 
+
+.solve-img{
+  color: #FFFFCC;
+  float: middle, right;
+  padding-left: 15px;
+  width: 25px;
+  size: 16px;
+  rotate: 350deg;
+}
+
 .reset-btn{
   display: block;
   background-color: #CCCCFF;
@@ -233,4 +244,13 @@ input{
 .reset-btn:hover {
   background-color: #FFFFCC;
   color: #CCCCFF;
+}
+
+.reset-img{
+  color: #FFFFCC;
+  float: middle, right;
+  padding-left: 10px;
+  width: 25px;
+  size: 16px;
+  rotate: 350deg;
 }

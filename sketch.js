@@ -5,9 +5,11 @@
 // Extra for Experts:
 // - I learnt about 3D arrays
 // - Used orbitControl function
+//- lots of HTML and CSS was apllied
 
-
-//https://www.youtube.com/watch?v=W24xhB9PO54
+//sources
+//https://www.youtube.com/watch?v=W24xhB9PO54 - very helpful in general
+//w3 schools if you count that
 
 //Screens
 let state = "loading";
