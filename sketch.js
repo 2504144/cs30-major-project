@@ -7,8 +7,10 @@
 // - Used orbitControl function
 
 
-//nice reference - https://www.youtube.com/watch?v=W24xhB9PO54
+//https://www.youtube.com/watch?v=W24xhB9PO54
 
+//Screens
+let state = "loading";
 //colors
 let color = new Map();
 color.set("up", "#fff700");//yellow
@@ -209,6 +211,13 @@ function setup() {
 function draw() {
 
   background(255, 255, 204);//color code - #FFFFCC
+
+  if (state === "loading"){
+    rotateX(frameCount * 0.01);
+    rotateY(frameCount * 0.02);
+    rotateY(frameCount * 0.02);
+    ambientLight(150);
+  }
 
   addCubes();
 }
@@ -471,6 +480,31 @@ function addCubes(){
   }
 }
 
+function playBtn(){
+  //connect from HTML to JS
+  let play = document.getElementsByClassName("play-btn");
+  
+  for (let i = 0; i < play.length; i++){
+    
+    //each button
+    play[i].addEventListener("click", 
+      function() {
+
+        //if clicked
+        this.classList.toggle("active");
+
+        //different screen
+        state = "game";
+
+        //take out button
+        if (state === "game"){
+          ambientLight(0);
+          this.style.display = "none";
+        }
+      });
+  }
+}
+
 
 //buttons on sidebar
 function sideNav(){
@@ -483,6 +517,10 @@ function sideNav(){
   setButton();
 
   solve();
+
+  reset();
+
+  playBtn();
 }
 
 function control(){
@@ -642,12 +680,83 @@ function keySystem(changeCode, input){
   } 
 }
 
+//self solve
 function solve(){
   let solve = document.getElementsByClassName("solve-btn");
 
   for (let i = 0; i < solve.length; i++){
-    
     solve[i].addEventListener("click", 
+      function solve() {
+
+        this.classList.toggle("active");
+
+        //reverse list 
+        let newList = listOfMoves.slice().reverse();
+
+        //goes through list and undoes them
+        for (let j = 0;j < newList.length; j++){
+
+          //delay each move so it can be visable
+          setTimeout(function(){
+            let moves = newList[j];
+
+            //does exact opposite of recorded move
+            if (moves === "r"){
+              turnLayerXCounterClockwise(2);
+            }
+            if (moves === "R"){
+              turnLayerX(2);
+            }
+            if (moves === "l"){
+              turnLayerX(0);
+            }
+            if (moves === "L"){
+              turnLayerXCounterClockwise(0);
+            }
+            if (moves === "u"){
+              turnLayerYCounterClockwise(0);
+            }
+            if (moves === "U"){
+              turnLayerY(0);
+            }
+            if (moves === "d"){
+              turnLayerY(2);
+            }
+            if (moves === "D"){
+              turnLayerYCounterClockwise(2);
+            }
+            if (moves === "f"){
+              turnLayerZCounterClockwise(0);
+            }
+            if (moves === "F"){
+              turnLayerZ(0);
+            }
+            if (moves === "b"){
+              turnLayerZ(2);
+            }
+            if (moves === "B"){
+              turnLayerZCounterClockwise(2);
+            }
+
+            //so it doesnt repeat
+            if (j === newList.length - 1) {
+              listOfMoves = [];
+            }    
+
+            //delays moves .5 sec
+          }, j * 500);    
+        }
+      });
+  }
+}
+
+//exact same as solve but doesnt show the moves
+function reset(){
+  let reset = document.getElementsByClassName("reset-btn");
+
+  for (let i = 0; i < reset.length; i++){
+    
+    reset[i].addEventListener("click", 
       function() {
 
         this.classList.toggle("active");

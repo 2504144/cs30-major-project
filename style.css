@@ -18,6 +18,42 @@ h1{
   left: 27%;
 }
 
+/* Play button */
+.play-btn{
+  position: absolute;
+  background-color: #CCCCFF;
+  font-family: "Kings";
+  color: #FFFFCC;
+  font-size: 50px;
+  padding: 25px, 15px;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+
+  border: none;
+  outline: none;
+  text-align: center;
+  cursor: pointer;
+
+  /* keeps it the opposite colour for a bit longer */
+  transition: background-color 0.3s;
+  width: 225px;
+}
+
+.play-btn .arrow{
+  transform: translate(+50%, +50%);
+  float: middle, right;
+  padding-right: 8px;
+  width: 16px;
+  rotate: 270deg;
+}
+
+.play-btn:hover {
+  background-color: #FFFFCC;
+  color: #CCCCFF;
+}
+
+
 /* Controls / Notation*/
 .sidenav {
   height: 100%;
@@ -173,6 +209,28 @@ input{
 }
 
 .solve-btn:hover {
+  background-color: #FFFFCC;
+  color: #CCCCFF;
+}
+
+.reset-btn{
+  display: block;
+  background-color: #CCCCFF;
+  font-family: "Kings";
+  color: #FFFFCC;
+  font-size: xx-large;
+  padding: 25px 15px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+
+  /* keeps it the opposite colour for a bit longer */
+  transition: background-color 0.3s;
+}
+
+.reset-btn:hover {
   background-color: #FFFFCC;
   color: #CCCCFF;
 }
